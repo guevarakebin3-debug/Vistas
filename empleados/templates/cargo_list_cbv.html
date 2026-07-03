@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Cargos (VBC){% endblock %}
+{% block content %}
+<div class="page-header">
+    <div>
+        <p class="eyebrow">Listado de cargos</p>
+        <h1>Cargos <span class="badge badge-cbv">VBC</span></h1>
+        <p class="page-subtitle">Mantén tus cargos con la misma estética en ambas versiones.</p>
+    </div>
+</div>
+<div class="panel">
+    <div class="toolbar">
+        <form method="get" class="search-form">
+            <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Buscar por nombre o descripción">
+            <button class="btn btn-secundario" type="submit">Buscar</button>
+            <button class="btn btn-pdf" type="submit" name="export" value="pdf">PDF</button>
+            <button class="btn btn-excel" type="submit" name="export" value="excel">Excel</button>
+        </form>
+        <a class="btn" href="{% url 'cbv_cargo_create' %}">+ Nuevo cargo</a>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Nombre</th><th>Descripción</th><th>Acciones</th></tr></thead>
+            <tbody>
+                {% for cargo in cargos %}
+                <tr>
+                    <td>{{ cargo.nombre }}</td>
+                    <td>{{ cargo.descripcion|default:"—" }}</td>
+                    <td class="acciones">
+                        <a href="{% url 'cbv_cargo_update' cargo.pk %}">Editar</a>
+                        <a href="{% url 'cbv_cargo_delete' cargo.pk %}">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="3" class="vacio">No hay cargos registrados.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

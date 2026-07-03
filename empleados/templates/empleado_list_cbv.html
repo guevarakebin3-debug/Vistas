@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Empleados (VBC){% endblock %}
+{% block content %}
+<div class="page-header">
+    <div>
+        <p class="eyebrow">Listado de personal</p>
+        <h1>Empleados <span class="badge badge-cbv">VBC</span></h1>
+        <p class="page-subtitle">Consulta y gestiona tus registros con el mismo diseño moderno.</p>
+    </div>
+</div>
+<div class="panel">
+    <div class="toolbar">
+        <form method="get" class="search-form">
+            <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Buscar por nombre, apellido o cargo">
+            <button class="btn btn-secundario" type="submit">Buscar</button>
+            <button class="btn btn-pdf" type="submit" name="export" value="pdf">PDF</button>
+            <button class="btn btn-excel" type="submit" name="export" value="excel">Excel</button>
+        </form>
+        <a class="btn" href="{% url 'cbv_empleado_create' %}">+ Nuevo empleado</a>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead><tr><th>Nombres</th><th>Apellidos</th><th>Correo</th><th>Sueldo</th><th>Ingreso</th><th>Cargo</th><th>Acciones</th></tr></thead>
+            <tbody>
+                {% for empleado in empleados %}
+                <tr>
+                    <td>{{ empleado.nombres }}</td>
+                    <td>{{ empleado.apellidos }}</td>
+                    <td>{{ empleado.correo }}</td>
+                    <td>{{ empleado.sueldo }}</td>
+                    <td>{{ empleado.fecha_ingreso }}</td>
+                    <td>{{ empleado.cargo.nombre }}</td>
+                    <td class="acciones">
+                        <a href="{% url 'cbv_empleado_update' empleado.pk %}">Editar</a>
+                        <a href="{% url 'cbv_empleado_delete' empleado.pk %}">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="7" class="vacio">No hay empleados registrados.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

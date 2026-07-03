@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div>
+        <p class="eyebrow">Formulario</p>
+        <h1>{{ titulo }} <span class="badge badge-fbv">VBF</span></h1>
+        <p class="page-subtitle">Escribe los datos del cargo para guardarlo correctamente.</p>
+    </div>
+</div>
+<div class="form-card">
+    <form method="POST" class="styled-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button class="btn" type="submit">Guardar</button>
+            <a class="btn btn-secundario" href="{% url 'fbv_cargo_list' %}">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

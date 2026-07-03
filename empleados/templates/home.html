@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Inicio{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="hero-card">
+        <p class="eyebrow">Sistema de gestión</p>
+        <h1>Administra empleados y cargos con una experiencia más limpia</h1>
+        <p class="page-subtitle">Este CRUD moderno te permite registrar, buscar, editar y exportar información con un diseño consistente y visualmente más atractivo.</p>
+        <div class="hero-actions">
+            <a class="btn" href="{% url 'fbv_empleado_list' %}">Ver empleados</a>
+            <a class="btn btn-secundario" href="{% url 'fbv_cargo_list' %}">Ver cargos</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

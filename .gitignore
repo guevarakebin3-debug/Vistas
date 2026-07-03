@@ -1,0 +1,17 @@
+venv/
+__pycache__/
+*.py[cod]
+*.sqlite3
+db.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+ENV/
+*.env
+.vscode/
+.idea/
+*.swp

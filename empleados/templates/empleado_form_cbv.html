@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}{{ titulo }}{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div>
+        <p class="eyebrow">Formulario</p>
+        <h1>{{ titulo }} <span class="badge badge-cbv">VBC</span></h1>
+        <p class="page-subtitle">Completa los datos para registrar o actualizar la información.</p>
+    </div>
+</div>
+<div class="form-card">
+    <form method="POST" class="styled-form">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="error-summary">
+                <strong>Corrige los siguientes errores:</strong>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {{ form.as_p }}
+        <div class="form-actions">
+            <button class="btn" type="submit">Guardar</button>
+            <a class="btn btn-secundario" href="{% url 'cbv_empleado_list' %}">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

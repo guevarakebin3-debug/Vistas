@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Eliminar cargo{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div>
+        <p class="eyebrow">Confirmación</p>
+        <h1>Eliminar cargo <span class="badge badge-fbv">VBF</span></h1>
+        <p class="page-subtitle">Esta acción no se puede deshacer.</p>
+    </div>
+</div>
+<div class="form-card">
+    <p>¿Seguro que deseas eliminar el cargo <strong>{{ cargo.nombre }}</strong>?</p>
+    {% if cargo.empleados.count %}
+    <p style="color:#c0392b; font-weight:600;">Atención: tiene {{ cargo.empleados.count }} empleado(s) asociado(s); también se eliminarán.</p>
+    {% endif %}
+    <form method="POST" class="form-actions">
+        {% csrf_token %}
+        <button class="btn btn-eliminar" type="submit">Sí, eliminar</button>
+        <a class="btn btn-secundario" href="{% url 'fbv_cargo_list' %}">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
